@@ -11,6 +11,6 @@ namespace Assets.Scripts {
         public int MaxHealth;
         public int HitDamage;
         public float MovementSpeed;
-        public Material DeadMaterial;
+        public Material DeathMaterial;
     }
 }

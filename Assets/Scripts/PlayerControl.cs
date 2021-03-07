@@ -46,9 +46,7 @@ namespace Assets.Scripts {
                 var direction = new Vector3(deltaTouch.x, 0, deltaTouch.y);
                 direction.Normalize();
                 direction *= -1;
-                self.Move(direction);
-
-                //rotate character
+                self.Move(direction); 
             }
         }
     }

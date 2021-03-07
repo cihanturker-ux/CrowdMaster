@@ -10,9 +10,11 @@ namespace Assets.Scripts {
         public CharacterController characterController;
 
         public bool useGravity = true;
+        public bool dropCoinOnDeath = false;
         public int MaxHealth { get => characterStatsConfig.MaxHealth; }
         public int HitDamage { get => characterStatsConfig.HitDamage; }
         public float MovementSpeed { get => characterStatsConfig.MovementSpeed; }
+        public Material DeathMaterial { get => characterStatsConfig.DeathMaterial; }
 
         public EventLayer eventLayer;
         public Animator animator;
@@ -38,9 +40,14 @@ namespace Assets.Scripts {
         private void TakeDamage(int damage) {
             this.CurrentHealth -= damage;
             if(this.CurrentHealth <= 0) {
-                eventLayer.RaiseDeathEvent();
-                skinnedMeshRenderer.material = characterStatsConfig.DeadMaterial;
-                skinnedMeshRenderer.sharedMaterial = characterStatsConfig.DeadMaterial;
+                if(eventLayer != null) {
+                    eventLayer.RaiseDeathEvent();
+                }
+                this.CurrentHealth = 0;
+                skinnedMeshRenderer.material = DeathMaterial;
+                skinnedMeshRenderer.sharedMaterial = DeathMaterial;
+
+
                 return;
             }
 
