@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 903dc9a5eadf5f042a38f91e83fb44e4, type: 3}
   m_Name: Event Layer
   m_EditorClassIdentifier: 
-  LowHealth: 20
+  LowHealthTrigger: 20
+  OnLowHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []

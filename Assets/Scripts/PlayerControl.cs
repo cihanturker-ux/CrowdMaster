@@ -2,10 +2,8 @@
 
 namespace Assets.Scripts {
     public class PlayerControl : MonoBehaviour {
-        public InputLayer inputLayer;
         public float moveCircleRadius = 200f;
-
-        private Vector2 touchBeganPoint;
+         
         private bool allowMovement;
 
         public WorldCharacter self;
@@ -20,38 +18,30 @@ namespace Assets.Scripts {
             Singleton = this;
         }
 
-        public void Register(InputLayer inputLayer, EventLayer eventLayer) {
+        public void Register(EventLayer eventLayer) {
             self.eventLayer = eventLayer;
-            this.inputLayer = inputLayer;
-            inputLayer.OnTouchBegan += this.OnTouchBegan;
-            inputLayer.OnTouchMoved += this.OnTouchMoved;
-            inputLayer.OnTouchEnded += this.OnTouchEnded;
-        }
-        public void OnDestroy() {
-            inputLayer.OnTouchBegan -= this.OnTouchBegan;
-            inputLayer.OnTouchMoved -= this.OnTouchMoved;
-            inputLayer.OnTouchEnded -= this.OnTouchEnded;
         }
 
-        private void OnTouchEnded(Touch touch) {
-            allowMovement = false;
-
-        }
-
-        private void OnTouchMoved(Touch touch) {
-            var deltaTouch = touchBeganPoint - inputLayer.LastTouchPosition;
-            if(deltaTouch.magnitude > moveCircleRadius) {
-                allowMovement = true;
-            }
-        }
-        private void OnTouchBegan(Touch touch) {
-            touchBeganPoint = touch.position;
-        }
-
-
+        private Vector2 touchBeganPoint;
         public void Update() {
-            if(allowMovement && inputLayer.Touching) {
-                var deltaTouch = touchBeganPoint - inputLayer.LastTouchPosition;
+            var mousepos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            if(Input.GetMouseButtonDown(0)) {
+                touchBeganPoint = mousepos;
+            }
+
+            if(Input.GetMouseButtonUp(0)) {
+                allowMovement = false;
+            }
+
+            if(Input.GetMouseButton(0)) {
+                var deltaTouch = touchBeganPoint - mousepos;
+                if(deltaTouch.magnitude > moveCircleRadius) {
+                    allowMovement = true;
+                }
+            }
+
+            if(allowMovement) {
+                var deltaTouch = touchBeganPoint - mousepos;
                 // Debug.Log("touchbegan " + touchBeganPoint + " lastTouch " + inputLayer.LastTouchPosition + " magnitude " + deltaTouch.magnitude);
                 var direction = new Vector3(deltaTouch.x, 0, deltaTouch.y);
                 direction.Normalize();

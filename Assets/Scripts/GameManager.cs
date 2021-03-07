@@ -5,12 +5,10 @@ using UnityEngine.Events;
 
 namespace Assets.Scripts {
     public class GameManager : MonoBehaviour {
-        public TouchManager touchManager;
         public GameObject playerPrefab;
         public SmoothFollow cameraSmoothFollow;
         public Transform playerSpawnPoint;
 
-        public InputLayer inputLayer;
         public EventLayer eventLayer;
 
         public WorldCharacter playerCharacter { get; private set; }
@@ -21,7 +19,7 @@ namespace Assets.Scripts {
             var spawnedPlayer = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
             var control = spawnedPlayer.GetComponent<PlayerControl>();
 
-            control.Register(this.inputLayer, this.eventLayer);
+            control.Register(this.eventLayer);
 
             cameraSmoothFollow.target = control.transform;
 
