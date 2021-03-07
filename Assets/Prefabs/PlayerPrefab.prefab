@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e61eef1a0f0a9349873e209c8146fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputLayer: {fileID: 0}
   moveCircleRadius: 100
   self: {fileID: 6386896140185472408}
 --- !u!143 &5398556884759420258

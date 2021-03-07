@@ -50,7 +50,7 @@ MonoBehaviour:
   state: 0
   detectionRange: 5
   attackRange: 1
-  actionSeconds: 1
+  AttackTimer: 1
 --- !u!143 &2233760181862052757
 CharacterController:
   m_ObjectHideFlags: 0
