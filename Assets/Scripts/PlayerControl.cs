@@ -23,6 +23,8 @@ namespace Assets.Scripts {
         }
 
         private Vector2 touchBeganPoint;
+        public PlayerPunchZone playerPunchZone;
+
         public void Update() {
             var mousepos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             if(Input.GetMouseButtonDown(0)) {
@@ -31,6 +33,7 @@ namespace Assets.Scripts {
 
             if(Input.GetMouseButtonUp(0)) {
                 allowMovement = false;
+                playerPunchZone.DealDamage();
             }
 
             if(Input.GetMouseButton(0)) {
@@ -49,5 +52,6 @@ namespace Assets.Scripts {
                 self.Move(direction); 
             }
         }
+ 
     }
 }

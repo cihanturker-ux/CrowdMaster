@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6065987597269265611}
   - component: {fileID: 6065987597269265610}
-  - component: {fileID: 3189324369390487606}
   m_Layer: 0
   m_Name: WorldCharacter
   m_TagString: Untagged
@@ -49,30 +48,14 @@ MonoBehaviour:
     MaxHealth: 0
     HitDamage: 0
     MovementSpeed: 0
-    DeadMaterial: {fileID: 2100000, guid: 41a6f57260f2f2d47a21814cec45bc91, type: 2}
-  characterController: {fileID: 3189324369390487606}
+    DeathMaterial: {fileID: 0}
+  characterController: {fileID: 0}
   useGravity: 1
+  coinPrefab: {fileID: 0}
+  isEnemy: 0
   eventLayer: {fileID: 0}
   animator: {fileID: 854869191327927249}
   CurrentHealth: 0
---- !u!143 &3189324369390487606
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6065987597269265608}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.23
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &6536850244767217216
 PrefabInstance:
   m_ObjectHideFlags: 0

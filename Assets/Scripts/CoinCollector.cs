@@ -1,16 +1,20 @@
 ﻿using UnityEngine;
 
-public class CoinCollector : MonoBehaviour {
-    public CoinManager coinManager;
-    public void Start() {
-        coinManager = CoinManager.Singleton;
-    }
+namespace Assets.Scripts {
+    public class CoinCollector : MonoBehaviour {
+        public EventLayer eventLayer;
+        private CoinManager coinManager;
+        public void Start() {
+            coinManager = CoinManager.Singleton;
+        }
 
-    private void OnCollisionEnter(Collision collision) {
-        var coin = collision.gameObject.GetComponent<Coin>();
-        if(coin != null) {
-            coinManager.CoinCount++;
-            Destroy(coin);
+        private void OnTriggerEnter(Collider other) {
+            var coin = other.gameObject.GetComponent<Coin>();
+            if(coin != null) {
+                eventLayer.RaiseCoinCollectEvent();
+                coinManager.CoinCount++;
+                Destroy(coin.gameObject);
+            }
         }
     }
 }

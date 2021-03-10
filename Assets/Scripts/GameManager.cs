@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts {
     public class GameManager : MonoBehaviour {
@@ -14,6 +15,10 @@ namespace Assets.Scripts {
         public WorldCharacter playerCharacter { get; private set; }
         public bool debugGUI = true;
 
+        public void Start() {
+
+            SpawnPlayer();
+        }
         [ContextMenu("Debug/Spawn Player")]
         public void SpawnPlayer() {
             var spawnedPlayer = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
@@ -28,12 +33,10 @@ namespace Assets.Scripts {
             }
         }
 
-        private void OnGUI() {
-            if(!debugGUI)
-                return;
-            if(GUILayout.Button("Spawn Player")) {
-                SpawnPlayer();
-            }
+        [ContextMenu("Debug/ResetScene")]
+        public void ResetScene(){
+            var scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.name);
         }
     }
 }

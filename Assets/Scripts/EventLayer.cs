@@ -9,7 +9,10 @@ namespace Assets.Scripts {
          
         public UnityEvent<int,int> OnTakeDamage;
         public UnityEvent OnLowHealth;
-        public UnityEvent OnDeath;
+        public UnityEvent OnPlayerDeath;
+        public UnityEvent OnEnemyDeath;
+        public UnityEvent OnEnemy;
+        public UnityEvent OnCoinCollect;
 
         public void RaiseTakeDamage(int damage, int remaininghealth) {
             OnTakeDamage.Invoke(damage, remaininghealth);
@@ -18,8 +21,15 @@ namespace Assets.Scripts {
             }
         }        
         
-        public void RaiseDeathEvent() {
-            OnDeath?.Invoke();
+        public void RaisePlayerDeathEvent() {
+            OnPlayerDeath.Invoke();
+        }
+
+        public void RaiseEnemyDeathEvent() {
+            OnEnemyDeath.Invoke();
+        }
+        public void RaiseCoinCollectEvent() {
+            OnCoinCollect.Invoke();
         }
     }
 }

@@ -52,6 +52,8 @@ namespace Assets.Scripts {
                     else if(dist < attackRange) {
                         if(CO_Attack == null && Target.CurrentHealth > 0) {
                             CO_Attack = StartCoroutine(DealDamageRoutine());
+                        }else if(Target.CurrentHealth <= 0) {
+                            Target = null;
                         }
                     } 
                     

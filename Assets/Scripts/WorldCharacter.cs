@@ -10,12 +10,14 @@ namespace Assets.Scripts {
         public CharacterController characterController;
 
         public bool useGravity = true;
-        public bool dropCoinOnDeath = false;
+        public GameObject coinPrefab;
+
         public int MaxHealth { get => characterStatsConfig.MaxHealth; }
         public int HitDamage { get => characterStatsConfig.HitDamage; }
         public float MovementSpeed { get => characterStatsConfig.MovementSpeed; }
         public Material DeathMaterial { get => characterStatsConfig.DeathMaterial; }
 
+        public bool isEnemy = false;
         public EventLayer eventLayer;
         public Animator animator;
 
@@ -41,9 +43,22 @@ namespace Assets.Scripts {
             this.CurrentHealth -= damage;
             if(this.CurrentHealth <= 0) {
                 if(eventLayer != null) {
-                    eventLayer.RaiseDeathEvent();
+                    //ui death event
+                    if(isEnemy) {
+                        eventLayer.RaiseEnemyDeathEvent();
+                    } else {
+                        eventLayer.RaisePlayerDeathEvent();
+                    }
+                    return;
                 }
+
+                if(coinPrefab != null) {
+                    //drop coin on death
+                    Instantiate(coinPrefab, this.transform.position, this.transform.rotation);
+                }
+
                 this.CurrentHealth = 0;
+
                 skinnedMeshRenderer.material = DeathMaterial;
                 skinnedMeshRenderer.sharedMaterial = DeathMaterial;
 
